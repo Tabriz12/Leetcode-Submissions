@@ -1,31 +1,31 @@
 class Solution:
     def summaryRanges(self, nums: List[int]) -> List[str]:
-
-        if not nums: return nums
-
-        if len(nums) == 1: return [str(nums[0])]
-
-
-        leng = 0
-
-        res = []
-
-        for idx in range(len(nums)-1):
-            if nums[idx] == nums[idx+1]-1:
-                leng += 1
-            else:
-                if leng: res.append("{}->{}".format(nums[idx-leng], nums[idx]))
-                else: res.append(str(nums[idx]))
-                leng = 0
         
-        if leng: res.append("{}->{}".format(nums[idx+1-leng], nums[idx+1]))
-        else: res.append(str(nums[idx+1]))
-        return res
+        if not len(nums): return []
+        start = nums[0]
 
+        rolling = start
 
+        out_list = []
 
-
-        
-
+        for idx, el in enumerate(nums[1:], 1):
             
+            if nums[idx-1] + 1 == el:
+                rolling = el
+            
+            else:
+                if start < rolling:
+                    out_list.append(f'{start}->{rolling}')
+                else: out_list.append(f'{start}')
+                start = el
+                rolling = el
+        
+        if start < rolling:
+            out_list.append(f'{start}->{rolling}')
+        else: out_list.append(f'{start}')
+        
+        return(out_list)
+
+
+
         
