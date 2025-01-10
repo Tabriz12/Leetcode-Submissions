@@ -1,10 +1,17 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        needed = []
-
-        for idx, el in enumerate(nums):
-            if el in needed: return [idx, needed.index(el)]
-            else: needed.append(target-el)
-
+        
+        dic_dic = {}
 
         
+        for i, el in enumerate(nums):
+
+            diff = target - el
+
+            if el in dic_dic.keys():
+                return [dic_dic[el], i]
+            
+            else:
+                dic_dic[diff] = i
+            
+            
