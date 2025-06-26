@@ -7,18 +7,19 @@
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
 
-        achilles = head
-        tortoise = head
+        seen  = set()
 
-        while achilles and achilles.next:
-            tortoise = tortoise.next
-            achilles = achilles.next.next
+        if not head:
+            return False
 
-            if achilles == tortoise:
+        while head.next:
+            if head not in seen:
+                seen.add(head)
+            else:
                 return True
+            head = head.next
         
         return False
 
 
-        
         
