@@ -4,24 +4,29 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-from collections import deque
 class Solution:
 
     def __init__(self):
-        self.deck = deque()
 
+        self.res = []
+    
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
 
-        if root:
-            self.inorderTraversal(root.left)
-            self.deck.append(root.val)
-            self.inorderTraversal(root.right)
+        if not root:
+            return self.res
+
+
+        return self.inorder(root)
+    
+
+    def inorder(self, root):
         
-        return list(self.deck)
-
+        if not root:
+            return
         
+        self.inorder(root.left)
+        self.res.append(root.val)
+        self.inorder(root.right)
 
-
-
-
+        return self.res
         
