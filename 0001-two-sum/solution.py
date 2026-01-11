@@ -1,17 +1,17 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         
-        dic_dic = {}
 
-        
-        for i, el in enumerate(nums):
+        dirty_deeds = {}
 
-            diff = target - el
+        for idx, num in enumerate(nums):
 
-            if el in dic_dic.keys():
-                return [dic_dic[el], i]
+            if target - num in dirty_deeds:
+
+                return [dirty_deeds[target-num], idx]
             
             else:
-                dic_dic[diff] = i
-            
-            
+
+                dirty_deeds[num] = idx
+
+
