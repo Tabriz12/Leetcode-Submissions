@@ -6,9 +6,7 @@
 class Solution:
     def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
 
-        start = ListNode(0, head)
-
-        dummy = start.next
+        dummy = head
 
         while dummy and dummy.next:
 
@@ -17,4 +15,4 @@ class Solution:
             else:
             
                 dummy = dummy.next
-        return start.next
+        return head
