@@ -1,21 +1,26 @@
+import sys
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
 
-        max_prof = 0
-        sell = prices[-1]
-        for prc in prices[::-1][1:]:
-            max_prof = max(sell-prc, max_prof)
-            sell = max(sell, prc)
+        anchor = sys.maxsize
+        max_profit = 0
+
+        for i in prices:
+
+            if i < anchor:
+
+                anchor = i
             
-        return max_prof
+            else:
+
+                max_profit = max(max_profit, i - anchor)
+
+        return max_profit
+        
+
+
+
+        
             
-
-        
-        
-    
-
-
-        
-
 
         
