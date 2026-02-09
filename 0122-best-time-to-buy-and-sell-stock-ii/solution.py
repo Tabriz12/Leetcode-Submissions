@@ -1,15 +1,33 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        
+
+
+        buy = True
+
         prof = 0
 
-        buy = prices[0]
+        if len(prices) < 2: return prof
 
-        for idx in range(1, len(prices)):
+        for i in range(len(prices)-1):
+
+            if buy:
+
+                if prices[i] < prices[i+1]:
+
+                    prof-=prices[i]
+                    buy = False
             
-            if prices[idx] > buy:
-                prof += (prices[idx] - buy)
-                
-            buy = prices[idx]
+            else:
 
+                if prices[i] >= prices[i+1]:
+
+                    prof+=prices[i]
+                    buy = True
+        
+        if buy == False:
+            prof+=prices[-1]
+        
         return prof
+
+            
+        
