@@ -6,37 +6,61 @@
 #         self.right = right
 from collections import deque
 class Solution:
-    def __init__(self):
 
-        self.waitin  = deque()
 
-        self.depth = 0
+    def inOrder(self, root):
 
-    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if root:
 
-        return self.BFS_moving(root)
+            self.dfs(root.left)
+            print(root.val)
+            self.dfs(root.right)
 
-    
-    def BFS_moving(self, root):
+
+    def recurse(self, root):
 
         if not root:
             return 0
         
-        self.waitin.append(root)
 
-        while self.waitin:
+        left = self.maxDepth(root.left)
+        right = self.maxDepth(root.right)
 
-            self.depth+=1
+        return 1 + max(left, right)
+    
+    def bfs(self, root):
 
-            for _ in range(len(self.waitin)):
+        if not root: return 0
 
-                node = self.waitin.popleft()
-                if node.left:
-                    self.waitin.append(node.left)
-                if node.right:
-                    self.waitin.append(node.right)
+        queue = deque([root])
+
+        d4c = 0
+
+        while queue:
+
+            for _ in range(len(queue)):
+
+                top = queue.popleft()
+
+                if top.left:
+                    queue.append(top.left)
+                
+                if top.right:
+                    queue.append(top.right)
+            
+            d4c+=1
         
-        return self.depth
+        return d4c
+
+
+
+
+
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+
+
+
+        return self.bfs(root)
 
 
 
