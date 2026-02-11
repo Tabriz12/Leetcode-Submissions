@@ -1,53 +1,34 @@
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
-
         
-        strs = sorted(strs)
+        anchor = strs[0]
         
-        common = strs[0]
+        ln = len(anchor)
 
-        for string in strs[1:]:
+        while ln > 0:
+            found = False
 
-            if len(string) < len(common):
+            for strng in strs:
 
-                if string == common[:len(string)]: 
-                    common = string
-                    print("case 1")
-                    print(common)
+                if not strng.startswith(anchor[:ln]):
 
-                else:
-                    for end in range(len(string)-1, -1, -1):
-                        if string[:end] == common[:end]:
-                            common = common[:end]
-                            print("case 2")
-                            print(common)
-                            break
-            else:
-                if string[:len(common)] != common:
-                    for end in range(len(common)-1, -1, -1):
-                        if string[:end] == common[:end]:
-                            common = common[:end]
-                            print("case 3")
-                            print(common)
-                            break
-
-            if len(common) == 0: return ""
-        
-        return common
+                    ln -=1
+                    found = True
+                    break
+            
+            if not found:
+                break
 
 
             
 
+                
 
-
-
-                    
-
-
-
-
-
-
-
-
+            
+            
         
+        return anchor[:ln] if ln > 0 else ""
+
+
+
+
