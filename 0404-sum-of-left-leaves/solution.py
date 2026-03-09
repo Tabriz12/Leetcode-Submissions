@@ -4,47 +4,37 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+from typing import Literal
 class Solution:
 
-    def walk(self, root, lefty: bool, summ:int):
+    def __init__(self):
 
-        if not root:
-            return 0
+        self.tot = 0
 
-        if not root.left and not root.right:
+    def preOrder(self, root, par: Literal['left', 'right'] | None):
 
-            if lefty: summ+=root.val
+        if root:
 
-        else:
-        
-            if root.left:
+            if not root.left and not root.right:
 
-                summ = self.walk(root.left, True, summ)
+                if par == 'left':
+
+                    self.tot+=root.val
             
-            if root.right:
-                summ = self.walk(root.right, False, summ)
-            
-        return summ
+            else:
 
-            
+                self.preOrder(root.left, 'left')
+                self.preOrder(root.right, 'right')
+
+
+
+
 
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
 
+        self.preOrder(root, None)
 
-        return self.walk(root.left, True, 0) + self.walk(root.right, False, 0)
-
-
-
-
-
-
-
-
-
-
-
+        return self.tot
 
 
         
-
-
