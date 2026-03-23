@@ -1,48 +1,50 @@
 from collections import deque
 class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:
-        
-        stack = deque()
 
-        max_area = 0
 
-        for idx, height in enumerate(heights):
+        stack = deque([[0, heights[0]]])
 
-            new_idx = idx
+        maxs = 0
 
-            while stack and height < stack[-1][1]:
+        for i, h in enumerate(heights[1:], 1):
 
+            temp  = i
+
+            while stack and h < stack[-1][-1]:
+
+                top_i, top_h = stack.pop()
+                temp = top_i
                 
-                (top_idx, top_h) = stack.pop()
-
-                new_idx = top_idx
-
-                max_area = max(max_area, (idx-top_idx) * top_h)
-            
-            stack.append((new_idx, height))
+                maxs = max(maxs, (i-top_i)*top_h)
             
 
+            stack.append([temp, h])
         
 
-        while stack:
-
-            (top_idx, top_h)  = stack.pop()
-
-            max_area = max(max_area, (len(heights)-top_idx) * top_h)
+        tot = len(heights)
         
+        if stack:
 
-        return max_area
+            while stack:
 
-
-
-
-
+                top_i, top_h = stack.pop()
+                maxs = max(maxs, (tot-top_i)*top_h)
         
+        return max(maxs, heights[0])
 
 
 
-        
+
+
+
                 
+
+
+
+
+
+
 
 
 
